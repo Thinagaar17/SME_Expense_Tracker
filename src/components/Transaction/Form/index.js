@@ -22,7 +22,7 @@ const NoAccounts = () => (
 );
 
 class TransactionForm extends React.Component {
-  state = { searchQuery: '', amount: '', type: '', date: '' };
+  state = { searchQuery: '', amount: '', type: '', date: '', acc: '', tag: '', rec:'' };
 
   // TODO: use callback function to get data from Speechly.js
   // TODO: set childData (data from account.js) to the respective varible (ex: this.props.form.amount )
@@ -36,29 +36,93 @@ class TransactionForm extends React.Component {
     console.log('type: ' + childData);
     if (childData === 'Income') {
       this.props.form.kind = Income;
-    } else {
+    } else if (childData === 'Expense') {
       this.props.form.kind = Expense;
+    } else if (childData === 'Trasfer') {
+      this.props.form.kind = Transfer;
+    } else {
+      return null;
     }
   };
 
   callbackFunction3 = childData => {
     this.setState({ date: childData });
     this.props.form.date = childData;
-    console.log('date: ' + childData);
+  };
+
+  callbackFunction4 = childData => {
+    // A1640612184826 Adam
+    // A1640604653660 Alex
+    // A1640612275930 John
+    console.log('Acc ' + childData);
+    if (childData === 'Adam') {
+      //setstate (re render the componenet)
+      this.setState({ acc: 'A1640612184826' });
+      //global variable
+      this.props.form.accountId = 'A1640612184826';
+    } else if (childData === 'Alex') {
+      this.setState({ acc: 'A1640604653660' });
+      this.props.form.accountId = 'A1640604653660';
+    } else if (childData === 'John') {
+      this.setState({ acc: 'A1640612275930' });
+      this.props.form.accountId = 'A1640612275930';
+    }
+  };
+
+  callbackFunction5 = childData => {
+    //  this.props.addTag({ kind: Income, tag: childData });
+    if (this.props.form.kind === Income) {
+      this.props.addTag({ kind: Income, tag: childData });
+      this.props.form.tags = {
+        0: [],
+        2: [childData]
+      };
+      this.setState({ tag: childData });
+    } else {
+      this.props.addTag({ kind: Expense, tag: childData });
+      this.props.form.tags = {
+        0: [childData],
+        2: []
+      };
+      this.setState({ tag: childData });
+    }
+  };
+
+  callbackFunction6 = childData => {
+    if (childData === 'Adam') {
+      //setstate (re render the componenet)
+      this.setState({ rec: 'A1640612184826' });
+      //global variable
+      this.props.form.linkedAccountId = 'A1640612184826';
+    } else if (childData === 'Alex') {
+      this.setState({ rec: 'A1640604653660' });
+      this.props.form.linkedAccountId = 'A1640604653660';
+    } else if (childData === 'John') {
+      this.setState({ rec: 'A1640612275930' });
+      this.props.form.linkedAccountId = 'A1640612275930';
+    }
   };
   // end of callback function
 
   onSubmit = event => {
     event.preventDefault();
-    // data changed in the form
-    this.props.saveTransaction(
-      formToState({ ...this.props.form, ...this.props.form.amount })
-    );
+    this.props.saveTransaction(formToState(this.props.form));
+    // console.log(this.props.form);
+    // console.log(this.props.form.tags);
+  };
+
+  onSubmitFromSpeechly = event => {
+    if (this.props.form.amount !== '0') {
+      this.props.saveTransaction(formToState(this.props.form));
+      this.setState({ amount: 0 });
+      this.props.form.amount = '0';
+    }
   };
 
   onChange = handler => (_, { value }) => handler(value);
 
   onAccountChange = handler => (_, { value }) => {
+    console.log(' in change acc func ' + value);
     handler({
       accountId: value,
       currency: this.props.accountCurrency[value]
@@ -99,6 +163,10 @@ class TransactionForm extends React.Component {
           parentCallback={this.callbackFunction}
           parentCallback2={this.callbackFunction2}
           parentCallback3={this.callbackFunction3}
+          parentCallback4={this.callbackFunction4}
+          parentCallback5={this.callbackFunction5}
+          parentCallback6={this.onSubmitFromSpeechly}
+          parentCallback7={this.callbackFunction6}
         />
         <Segment attached="bottom">
           <Form onSubmit={this.onSubmit} className="transaction-form">
@@ -192,13 +260,19 @@ class TransactionForm extends React.Component {
                 </div>
               </div>
             </div>
-            <div>
-              <PushToTalkButtonContainer>
-                <PushToTalkButton />
-              </PushToTalkButtonContainer>
-            </div>
           </Form>
         </Segment>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <PushToTalkButtonContainer>
+            <PushToTalkButton />
+          </PushToTalkButtonContainer>
+        </div>
       </React.Fragment>
     );
   }
