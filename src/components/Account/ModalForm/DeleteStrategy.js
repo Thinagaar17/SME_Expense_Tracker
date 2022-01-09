@@ -5,11 +5,17 @@ import {
   getDeleteStartegyOptions,
   DeleteStrategyT
 } from 'entities/Account';
+import {
+  PushToTalkButton,
+  PushToTalkButtonContainer
+} from '@speechly/react-ui';
+import Speechly from './Speechly';
 
 class DeleteStrategy extends React.Component {
   state = {
     strategy: defaultDeleteStrategy
   };
+  
 
   onStrategyChange = (e, { value }) => {
     this.setState({ ...this.state, strategy: value });
@@ -22,7 +28,7 @@ class DeleteStrategy extends React.Component {
   onProceed = () => {
     this.props.removeAccount({
       id: this.props.form.id,
-      strategy: this.state.strategy,
+      strategy: 1,
       moveTo: this.getMoveTo()
     });
   };
@@ -35,12 +41,15 @@ class DeleteStrategy extends React.Component {
     const hasMultipleAccounts = this.props.accountOptions.length > 0;
     return (
       <React.Fragment>
-        <h3>You are about to delete account "{this.props.form.name}"</h3>
+        {/* <Speechly
+          parentCallback2={this.onProceed}
+        /> */}
+        <h3>You are about to delete transactions with account "{this.props.form.name}"</h3>
         <p style={{ marginTop: '1em' }}>
-          What should we do with transactions linked to this account?
+         Are you sure you want to proceed?
         </p>
         <Form>
-          {getDeleteStartegyOptions(hasMultipleAccounts).map(strategy => (
+          {/* {getDeleteStartegyOptions(hasMultipleAccounts).map(strategy => (
             <Form.Field key={strategy.key}>
               <Radio
                 name="deleteStrategy"
@@ -62,7 +71,7 @@ class DeleteStrategy extends React.Component {
                 disabled={this.props.modal.isDeleteRunning}
               />
             </Form.Field>
-          )}
+          )} */}
           <Form.Field>
             {this.props.modal.isDeleteRunning ? (
               <Progress
@@ -80,6 +89,9 @@ class DeleteStrategy extends React.Component {
             )}
           </Form.Field>
         </Form>
+        {/* <PushToTalkButtonContainer>
+            <PushToTalkButton />
+        </PushToTalkButtonContainer> */}
       </React.Fragment>
     );
   }

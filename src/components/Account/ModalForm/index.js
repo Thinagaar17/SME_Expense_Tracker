@@ -3,12 +3,39 @@ import React from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
 import { DropdownOption } from '../../types';
 import DeleteStrategy from './DeleteStrategy';
+import {
+  PushToTalkButton,
+  PushToTalkButtonContainer
+} from '@speechly/react-ui';
+import Speechly from './Speechly';
 
 class ModalForm extends React.Component {
+  state = { del: "" };
   reset = () => {
     if (this.props.modal.isDeleteRunning) return false;
     this.props.resetAccountForm();
   };
+
+  callbackFunction = event => {
+   
+    this.props.modal.isDeleteRequest = true;
+    this.setState({ del: "true" });
+    
+  };
+
+  callbackFunction2 = event => {
+   
+    this.delete.onProceed();
+    this.setState({ del: "done" });
+    
+  };
+
+  callbackFunction3 = event => {
+    this.props.removeAccountRequest();
+    window.location.reload();
+  };
+
+ 
 
   render() {
     return (
@@ -23,14 +50,24 @@ class ModalForm extends React.Component {
           icon="file text outline"
           content={this.props.isEdit ? 'Edit Account' : 'New Account'}
         />
+        <Speechly
+         parentCallback={this.callbackFunction}
+         parentCallback3={this.callbackFunction3}
+         parentCallback2={this.callbackFunction2}
+         
+         
+        />
         <Modal.Content>
           {this.props.modal.isDeleteRequest ? (
-            <DeleteStrategy {...this.props} />
+            <DeleteStrategy ref={(ref) => this.delete = ref} {...this.props} />
           ) : (
             <this.props.EditForm />
           )}
         </Modal.Content>
         <Modal.Actions>{this.renderModalActions()}</Modal.Actions>
+        <PushToTalkButtonContainer>
+            <PushToTalkButton />
+        </PushToTalkButtonContainer>
       </Modal>
     );
   }
