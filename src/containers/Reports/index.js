@@ -6,6 +6,7 @@ import { getBaseCurrency, getBaseCurrencySymbol } from 'selectors/settings';
 import Report from 'components/Report';
 import Navigation from './Navigation';
 import Filter from './Filter';
+import { PushToTalkButton, PushToTalkButtonContainer} from '@speechly/react-ui';
 
 class Reports extends React.Component {
   componentWillMount() {
@@ -17,8 +18,13 @@ class Reports extends React.Component {
     return (
       <div className="container-full-page flat">
         <Navigation />
+        
         <Report {...this.props} />
         <Filter />
+
+        <PushToTalkButtonContainer>
+          <PushToTalkButton />
+        </PushToTalkButtonContainer>
       </div>
     );
   }
@@ -29,7 +35,7 @@ const mapStateToProps = state => ({
   currency: getBaseCurrencySymbol(state),
   base: getBaseCurrency(state),
   kind: state.ui.report.kind,
-  data: state.ui.report.data
+  data: state.ui.report.data,
 });
 
 export default connect(
