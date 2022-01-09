@@ -16,7 +16,7 @@ Sentry.init({
 const store = configureStore();
 const history = createBrowserHistory();
 ReactDOM.render(
-  <SpeechProvider appId="7e075e00-0408-4ed0-b3ed-9e634f85721b" language="en-US">
+  <SpeechProvider appId="2c7b9fce-c5fa-4a0a-a9dd-2146ad21b415" language="en-US">
     <Root store={store} history={history} />
   </SpeechProvider>,
   document.getElementById('root')

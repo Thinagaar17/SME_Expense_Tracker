@@ -4,13 +4,48 @@ import { Form, Checkbox } from 'semantic-ui-react';
 import { getAccountGroupOptions, formTostate } from 'entities/Account';
 import BalanceTable from './BalanceTable';
 import './index.css';
+import Speechly from '../Speechly2';
 
 class AccountForm extends React.Component {
+  state = { amount: '', type: '', name: ''};
+
   constructor(props) {
     super(props);
 
     this.groups = getAccountGroupOptions();
   }
+
+  callbackFunction = childData => {
+    this.setState({ name: childData });
+    this.props.form.name = childData;
+    console.log('name: ' + childData);
+    
+  };
+
+  callbackFunction2 = childData => {
+    this.setState({ type: childData });
+    console.log('group: ' + childData);
+    if (childData === 'cash') {
+      this.props.form.group = childData;
+    } else if (childData === 'bank'){
+      this.props.form.group = childData;
+    }else if (childData === 'deposit'){
+      this.props.form.group = childData;
+    }else if (childData === 'credit'){
+      this.props.form.group = childData;
+    }else if (childData === 'asset'){
+      this.props.form.group = childData;
+    }else{
+      return null;
+    }
+  };
+
+  callbackFunction3 = childData => {
+    const getCurrency = this.props.form.currencies;
+    this.setState({ amount: childData });
+    this.props.form.balance[getCurrency] = childData;
+    console.log('currency: '+ getCurrency +' , balanceIndex: ' + childData);
+  };
 
   handleNameChange = (event, { value }) => this.props.changeName(value);
   handleGroupChange = (event, { value }) => this.props.changeGroup(value);
@@ -20,9 +55,35 @@ class AccountForm extends React.Component {
     this.props.saveAccount(formTostate(this.props.form));
   };
 
+  handleSubmitFromSpeechly = event => {
+    console.log("her2");
+    if (this.props.form.balance[this.props.form.currencies] !== '0' && this.props.form.name !== '') {
+      console.log("here");
+      this.props.saveAccount(formTostate(this.props.form));
+      this.setState({ amount: 0 , name: ''});
+      this.props.form.balance[this.props.form.currencies] = '0';
+      this.props.form.name = '';
+      setTimeout(function() { 
+        window.location.reload();; 
+      }, 1000);
+      // window.location.reload();
+    }
+  };
+
   render() {
     return (
       <Form className="account-form" onSubmit={this.handleSubmit}>
+        <div elevation={3} style={{ textAlign: 'center', padding: '0 10%' }}>
+          Try saying: <br /> 
+          Set account 'name' with group 'type of group' for amount 'amount' <br />
+        </div>
+        {/* Initialize Speechly component with respectuve callback funtion */}
+        <Speechly
+          parentCallback1={this.callbackFunction}
+          parentCallback2={this.callbackFunction2}
+          parentCallback3={this.callbackFunction3}
+          parentCallback4={this.handleSubmitFromSpeechly}
+        />
         <Form.Group>
           <Form.Input
             width={9}
