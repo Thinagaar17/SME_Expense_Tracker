@@ -19,51 +19,6 @@ const Speechly = props => {
         else if (segment.intent.intent === 'not_proceed') {
             props.parentCallback3();
         } 
-        // else if (segment.intent.intent === 'add_income') {
-        //   props.parentCallback2('Income');
-        // } else if (segment.intent.intent === 'add_expense') {
-        //   props.parentCallback2('Expense');
-        // } else if (segment.intent.intent === 'add_transaction') {
-        //   props.parentCallback2('Trasfer');
-        // }
-
-        // segment.entities.forEach(e => {
-        //   const category = `${e.value.charAt(0)}${e.value
-        //     .slice(1)
-        //     .toLowerCase()}`;
-        //   switch (e.type) {
-        //     case 'amount':
-        //       props.parentCallback(e.value);
-        //       break;
-        //     case 'category':
-        //       console.log(category);
-        //       props.parentCallback2(category);
-        //       break;
-        //     case 'date':
-        //       props.parentCallback3(e.value);
-        //       break;
-        //     case 'account':
-        //       const acc = `${e.value.charAt(0)}${e.value
-        //         .slice(1)
-        //         .toLowerCase()}`;
-        //       props.parentCallback4(acc);
-        //       break;
-        //     case 'tag':
-        //       const tag = `${e.value.charAt(0)}${e.value
-        //         .slice(1)
-        //         .toLowerCase()}`;
-        //       props.parentCallback5(tag);
-        //       break;
-        //       case 'receiver':
-        //         const rec = `${e.value.charAt(0)}${e.value
-        //           .slice(1)
-        //           .toLowerCase()}`;
-        //         props.parentCallback7(rec);
-        //         break;
-        //     default:
-        //       break;
-        //   }
-        // });
       }
     },
     [segment]
