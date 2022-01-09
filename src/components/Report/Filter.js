@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 import { DropdownOption } from '../types';
+import Speechly2 from './Speechly2';
 
 class Filter extends React.Component {
   handleAccountsChange = (_, { value }) => {
+    console.log('sini: ' + value);
     this.props.changeReportAccounts(value);
   };
 
@@ -12,9 +14,28 @@ class Filter extends React.Component {
     this.props.changeReportExcludedTags(value);
   };
 
+  callbackFunction3 = childData => {
+    this.props.changeReportExcludedTags([childData]);
+  };
+
+  callbackFunction4 = childData => {
+    console.log('sana ' + childData);
+    if (childData === 'Adam') {
+      this.props.changeReportAccounts(['A1641729573400']);
+    } else if (childData === 'Alex') {
+      this.props.changeReportAccounts(['A1641729521974']);
+    } else if (childData === 'John') {
+      this.props.changeReportAccounts(['A1641729583593']);
+    }
+  };
+
   render() {
     return (
       <div className="container-footer">
+        <Speechly2
+          parentCallback3={this.callbackFunction3}
+          parentCallback4={this.callbackFunction4}
+        />
         <Dropdown
           multiple
           selection
