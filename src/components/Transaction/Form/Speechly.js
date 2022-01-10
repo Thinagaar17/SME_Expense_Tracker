@@ -15,6 +15,8 @@ const Speechly = props => {
           props.parentCallback2('Expense');
         } else if (segment.intent.intent === 'add_transaction') {
           props.parentCallback2('Trasfer');
+        }else if (segment.intent.intent === 'save_transaction' ) {
+          props.parentCallback8();
         }
 
         segment.entities.forEach(e => {
@@ -26,7 +28,6 @@ const Speechly = props => {
               props.parentCallback(e.value);
               break;
             case 'category':
-              console.log(category);
               props.parentCallback2(category);
               break;
             case 'date':
@@ -36,6 +37,7 @@ const Speechly = props => {
               const acc = `${e.value.charAt(0)}${e.value
                 .slice(1)
                 .toLowerCase()}`;
+              console.log('From ' + acc);
               props.parentCallback4(acc);
               break;
             case 'tag':
@@ -44,12 +46,19 @@ const Speechly = props => {
                 .toLowerCase()}`;
               props.parentCallback5(tag);
               break;
-              case 'receiver':
-                const rec = `${e.value.charAt(0)}${e.value
-                  .slice(1)
-                  .toLowerCase()}`;
-                props.parentCallback7(rec);
-                break;
+            case 'receiver':
+              const rec = `${e.value.charAt(0)}${e.value
+                .slice(1)
+                .toLowerCase()}`;
+              props.parentCallback7(rec);
+              console.log('To ' + rec);
+              break;
+            case 'trans':
+              const trans = `${e.value.charAt(0)}${e.value
+                .slice(1)
+                .toLowerCase()}`;
+              props.parentCallback2(trans);
+              break;
             default:
               break;
           }
