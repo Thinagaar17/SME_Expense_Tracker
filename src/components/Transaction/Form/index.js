@@ -1,4 +1,7 @@
 import React from 'react';
+//import { useSelector } from 'react-redux';
+//import { deleteTransactionTharvin } from '../../../actions/ui/form/transaction';
+
 import PropTypes from 'prop-types';
 import {
   PushToTalkButton,
@@ -15,20 +18,28 @@ import Header from './Header';
 import Account from './Account';
 import './index.css';
 import Speechly from './Speechly';
-
 const { Expense, Transfer, Income } = TransationKindT;
 const NoAccounts = () => (
   <div className="transactions-form__empty">You don't have any accounts.</div>
 );
 
 class TransactionForm extends React.Component {
-  state = { searchQuery: '', amount: '', type: '', date: '', acc: '', tag: '', rec:'' };
+  state = {
+    searchQuery: '',
+    amount: '',
+    type: '',
+    date: '',
+    acc: '',
+    tag: '',
+    rec: ''
+  };
 
   // TODO: use callback function to get data from Speechly.js
   // TODO: set childData (data from account.js) to the respective varible (ex: this.props.form.amount )
   callbackFunction = childData => {
     this.setState({ amount: childData });
     this.props.form.amount = childData;
+    this.props.form.linkedAmount = childData;
   };
 
   callbackFunction2 = childData => {
@@ -102,21 +113,36 @@ class TransactionForm extends React.Component {
       this.props.form.linkedAccountId = 'A1640612275930';
     }
   };
+
+  // callbackFunction7 = childData => {
+  //   console.log(childData);
+  //   this.props.deleteTransactionTharvin = childData;
+  // };
   // end of callback function
 
   onSubmit = event => {
     event.preventDefault();
     this.props.saveTransaction(formToState(this.props.form));
-    // console.log(this.props.form);
-    // console.log(this.props.form.tags);
   };
 
   onSubmitFromSpeechly = event => {
-    if (this.props.form.amount !== '0') {
+    console.log('transaction masuk');
+    if (this.props.form.amount !== '' && this.state.amount !== '0') {
       this.props.saveTransaction(formToState(this.props.form));
       this.setState({ amount: 0 });
+      console.log('not edit');
+    }
+  };
+
+  onSubmitFromSpeechlyEditedForm = () => {
+    if (parseInt(this.props.form.amount) > 0) {
+      this.props.saveTransaction(formToState(this.props.form));
       this.props.form.amount = '0';
     }
+    console.log(typeof this.props.form.amount);
+    console.log('amount ' + this.props.form.amount);
+    console.log('amount ' + this.props.form.amount === 'String');
+    console.log('edit');
   };
 
   onChange = handler => (_, { value }) => handler(value);
@@ -158,6 +184,7 @@ class TransactionForm extends React.Component {
           activeKind={this.props.form.kind}
           changeKind={this.props.changeKind}
         />
+        {/* <label>{deleteTransactionTharvin}</label> */}
         {/* Initialize Speechly component with respectuve callback funtion */}
         <Speechly
           parentCallback={this.callbackFunction}
@@ -167,6 +194,8 @@ class TransactionForm extends React.Component {
           parentCallback5={this.callbackFunction5}
           parentCallback6={this.onSubmitFromSpeechly}
           parentCallback7={this.callbackFunction6}
+          parentCallback8={this.onSubmitFromSpeechlyEditedForm}
+          // parentCallback8={this.callbackFunction7}
         />
         <Segment attached="bottom">
           <Form onSubmit={this.onSubmit} className="transaction-form">
@@ -306,6 +335,7 @@ TransactionForm.propTypes = {
   changeLinkedAmount: PropTypes.func,
   changeLinkedCurrency: PropTypes.func,
   addTag: PropTypes.func,
+  deleteTransactionTharvin: PropTypes.func,
   changeTags: PropTypes.func,
   changeDate: PropTypes.func.isRequired,
   changeNote: PropTypes.func.isRequired,
