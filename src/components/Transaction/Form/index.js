@@ -31,7 +31,7 @@ class TransactionForm extends React.Component {
     date: '',
     acc: '',
     tag: '',
-    rec: '',
+    rec: '', // Resolved conflict by deleting notes 
     accounts: []
   };
 
@@ -97,7 +97,6 @@ class TransactionForm extends React.Component {
   };
 
   callbackFunction5 = childData => {
-    //  this.props.addTag({ kind: Income, tag: childData });
     if (this.props.form.kind === Income) {
       this.props.addTag({ kind: Income, tag: childData });
       this.props.form.tags = {
@@ -139,10 +138,10 @@ class TransactionForm extends React.Component {
     // }
   };
 
-  // callbackFunction7 = childData => {
-  //   console.log(childData);
-  //   this.props.deleteTransactionTharvin = childData;
-  // };
+  callbackFunction7 = childData => {
+    this.setState({ note: childData });
+    this.props.form.note = childData;
+  };
   // end of callback function
 
   onSubmit = event => {
@@ -152,9 +151,10 @@ class TransactionForm extends React.Component {
 
   onSubmitFromSpeechly = event => {
     console.log('transaction masuk');
-    if (this.props.form.amount !== '' && this.state.amount !== '0') {
+    if (parseInt(this.props.form.amount) > 0) {
       this.props.saveTransaction(formToState(this.props.form));
       this.setState({ amount: 0 });
+      this.props.form.amount = '0';
       console.log('not edit');
     }
   };
@@ -220,7 +220,7 @@ class TransactionForm extends React.Component {
           parentCallback6={this.onSubmitFromSpeechly}
           parentCallback7={this.callbackFunction6}
           parentCallback8={this.onSubmitFromSpeechlyEditedForm}
-          // parentCallback8={this.callbackFunction7}
+          parentCallback9={this.callbackFunction7}
         />
         <Segment attached="bottom">
           <Form onSubmit={this.onSubmit} className="transaction-form">

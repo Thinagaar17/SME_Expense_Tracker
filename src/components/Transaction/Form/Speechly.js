@@ -15,8 +15,15 @@ const Speechly = props => {
           props.parentCallback2('Expense');
         } else if (segment.intent.intent === 'add_transaction') {
           props.parentCallback2('Trasfer');
-        }else if (segment.intent.intent === 'save_transaction' ) {
+        } else if (segment.intent.intent === 'save_transaction') {
           props.parentCallback8();
+        } else if (segment.intent.intent === 'add_note') {
+          let initialNote = segment.words.map(w => w.value).join(' ');
+          let secondNote = initialNote.split('NOTE');
+          let thirdNote = secondNote[1];
+          let fourthNote = thirdNote.trim();
+          let fifthNote = fourthNote.toLowerCase();
+          props.parentCallback9(fifthNote);
         }
 
         segment.entities.forEach(e => {

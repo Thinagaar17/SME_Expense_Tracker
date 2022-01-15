@@ -8,7 +8,10 @@ import { loadAccounts } from '../../actions/entities/accounts';
 import { loadTags } from '../../actions/entities/tags';
 import { loadFilterTransactions } from '../../actions/entities/transactions';
 import { applyFilters } from '../../actions/ui/transaction/filter';
-
+import {
+  PushToTalkButton,
+  PushToTalkButtonContainer
+} from '@speechly/react-ui';
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
@@ -33,14 +36,28 @@ class Transactions extends React.Component {
         <List />
         <Pager />
         <Footer />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <PushToTalkButtonContainer>
+            <PushToTalkButton />
+          </PushToTalkButtonContainer>
+        </div>
       </div>
     );
   }
 }
 
-export default connect(undefined, {
-  loadAccounts,
-  loadTags,
-  loadFilterTransactions,
-  applyFilters
-})(Transactions);
+export default connect(
+  undefined,
+  {
+    loadAccounts,
+    loadTags,
+    loadFilterTransactions,
+    applyFilters
+  }
+)(Transactions);
