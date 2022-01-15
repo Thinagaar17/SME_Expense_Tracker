@@ -1,7 +1,7 @@
 import React from 'react';
 //import { useSelector } from 'react-redux';
 //import { deleteTransactionTharvin } from '../../../actions/ui/form/transaction';
-
+import Accounts from '../../../../src/util/storage/accounts';
 import PropTypes from 'prop-types';
 import {
   PushToTalkButton,
@@ -31,8 +31,15 @@ class TransactionForm extends React.Component {
     date: '',
     acc: '',
     tag: '',
-    rec: ''
+    rec: '', // Resolved conflict by deleting notes 
+    accounts: []
   };
+
+  //fetch all accounts from the db
+  async componentDidMount() {
+    const account = await Accounts.loadAll();
+    this.setState({ accounts: account });
+  }
 
   // TODO: use callback function to get data from Speechly.js
   // TODO: set childData (data from account.js) to the respective varible (ex: this.props.form.amount )
@@ -62,26 +69,34 @@ class TransactionForm extends React.Component {
   };
 
   callbackFunction4 = childData => {
+    let ACC = this.state.accounts;
+    const newArray = ACC.filter(element => element.name === childData);
+    if (newArray === []) {
+      return null;
+    } else {
+      let accountId = newArray[0].id;
+      this.setState({ acc: accountId });
+      this.props.form.accountId = accountId;
+    }
     // A1640612184826 Adam
     // A1640604653660 Alex
     // A1640612275930 John
-    console.log('Acc ' + childData);
-    if (childData === 'Adam') {
-      //setstate (re render the componenet)
-      this.setState({ acc: 'A1640612184826' });
-      //global variable
-      this.props.form.accountId = 'A1640612184826';
-    } else if (childData === 'Alex') {
-      this.setState({ acc: 'A1640604653660' });
-      this.props.form.accountId = 'A1640604653660';
-    } else if (childData === 'John') {
-      this.setState({ acc: 'A1640612275930' });
-      this.props.form.accountId = 'A1640612275930';
-    }
+    // console.log('Acc ' + childData);
+    // if (childData === 'Adam') {
+    //   //setstate (re render the componenet)
+    //   this.setState({ acc: 'A1640612184826' });
+    //   //global variable
+    //   this.props.form.accountId = 'A1640612184826';
+    // } else if (childData === 'Alex') {
+    //   this.setState({ acc: 'A1640604653660' });
+    //   this.props.form.accountId = 'A1640604653660';
+    // } else if (childData === 'John') {
+    //   this.setState({ acc: 'A1640612275930' });
+    //   this.props.form.accountId = 'A1640612275930';
+    // }
   };
 
   callbackFunction5 = childData => {
-    //  this.props.addTag({ kind: Income, tag: childData });
     if (this.props.form.kind === Income) {
       this.props.addTag({ kind: Income, tag: childData });
       this.props.form.tags = {
@@ -100,24 +115,33 @@ class TransactionForm extends React.Component {
   };
 
   callbackFunction6 = childData => {
-    if (childData === 'Adam') {
-      //setstate (re render the componenet)
-      this.setState({ rec: 'A1640612184826' });
-      //global variable
-      this.props.form.linkedAccountId = 'A1640612184826';
-    } else if (childData === 'Alex') {
-      this.setState({ rec: 'A1640604653660' });
-      this.props.form.linkedAccountId = 'A1640604653660';
-    } else if (childData === 'John') {
-      this.setState({ rec: 'A1640612275930' });
-      this.props.form.linkedAccountId = 'A1640612275930';
+    let ACC = this.state.accounts;
+    const newArray = ACC.filter(element => element.name === childData);
+    if (newArray === []) {
+      return null;
+    } else {
+      let accountId = newArray[0].id;
+      this.setState({ rec: accountId });
+      this.props.form.linkedAccountId = accountId;
     }
+    // if (childData === 'Adam') {
+    //   //setstate (re render the componenet)
+    //   this.setState({ rec: 'A1640612184826' });
+    //   //global variable
+    //   this.props.form.linkedAccountId = 'A1640612184826';
+    // } else if (childData === 'Alex') {
+    //   this.setState({ rec: 'A1640604653660' });
+    //   this.props.form.linkedAccountId = 'A1640604653660';
+    // } else if (childData === 'John') {
+    //   this.setState({ rec: 'A1640612275930' });
+    //   this.props.form.linkedAccountId = 'A1640612275930';
+    // }
   };
 
-  // callbackFunction7 = childData => {
-  //   console.log(childData);
-  //   this.props.deleteTransactionTharvin = childData;
-  // };
+  callbackFunction7 = childData => {
+    this.setState({ note: childData });
+    this.props.form.note = childData;
+  };
   // end of callback function
 
   onSubmit = event => {
@@ -127,9 +151,10 @@ class TransactionForm extends React.Component {
 
   onSubmitFromSpeechly = event => {
     console.log('transaction masuk');
-    if (this.props.form.amount !== '' && this.state.amount !== '0') {
+    if (parseInt(this.props.form.amount) > 0) {
       this.props.saveTransaction(formToState(this.props.form));
       this.setState({ amount: 0 });
+      this.props.form.amount = '0';
       console.log('not edit');
     }
   };
@@ -195,7 +220,7 @@ class TransactionForm extends React.Component {
           parentCallback6={this.onSubmitFromSpeechly}
           parentCallback7={this.callbackFunction6}
           parentCallback8={this.onSubmitFromSpeechlyEditedForm}
-          // parentCallback8={this.callbackFunction7}
+          parentCallback9={this.callbackFunction7}
         />
         <Segment attached="bottom">
           <Form onSubmit={this.onSubmit} className="transaction-form">
