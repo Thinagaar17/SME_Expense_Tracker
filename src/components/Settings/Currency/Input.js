@@ -7,7 +7,8 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
 
-    this.options = Currency.options();
+    const currency = Currency.options();
+    this.options = [currency[95]];
     this.updateSecondaryOptions(props.base);
   }
 
@@ -21,7 +22,7 @@ class Input extends React.Component {
 
   handleBaseChange = (event, { value }) => {
     this.props.changeSettingsCurrency({
-      base: value,
+      base: 'MYR',
       secondary: this.props.secondary
     });
   };
@@ -44,10 +45,10 @@ class Input extends React.Component {
               selection
               onChange={this.handleBaseChange}
               options={this.options}
-              value={this.props.base}
+              value={'MYR'}
             />
           </Form.Field>
-          <Form.Field>
+          {/* <Form.Field>
             <label>Additional Currencies (optional)</label>
             <Dropdown
               placeholder="Select additional currencies"
@@ -60,7 +61,7 @@ class Input extends React.Component {
               options={this.secondaryOptions}
               value={this.props.secondary}
             />
-          </Form.Field>
+          </Form.Field> */}
         </Form.Group>
       </Form>
     );
