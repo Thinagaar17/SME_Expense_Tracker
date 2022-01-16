@@ -1,7 +1,13 @@
 import React from 'react';
+import Accounts from '../../../../src/util/storage/accounts';
 import PropTypes from 'prop-types';
 import { Modal, Button, Form, Dropdown } from 'semantic-ui-react';
 import { DropdownOption } from '../../types';
+import {
+  PushToTalkButton,
+  PushToTalkButtonContainer
+} from '@speechly/react-ui';
+import SpeechlyFilter2 from './SpeechlyFilter2';
 
 class Filters extends React.Component {
   constructor(props) {
@@ -9,8 +15,14 @@ class Filters extends React.Component {
 
     this.state = {
       accounts: this.props.appliedAccounts,
-      tags: this.props.appliedTags
+      tags: this.props.appliedTags,
+      newAcc: []
     };
+  }
+
+  async componentDidMount() {
+    const account = await Accounts.loadAll();
+    this.setState({ newAcc: account });
   }
 
   componentWillReceiveProps({ appliedAccounts, appliedTags }) {
@@ -36,6 +48,28 @@ class Filters extends React.Component {
     this.props.toggleFilterModal();
   };
 
+  callbackFunction4 = childData => {
+    let ACC = this.state.newAcc;
+    const newArray = ACC.filter(element => element.name === childData);
+    if (newArray === []) {
+      return null;
+    } else {
+      let accountId = newArray[0].id;
+      let array = [];
+      array.push(accountId.toString());
+      this.state.accounts = array;
+      this.setState({ accounts: array });
+    }
+  };
+
+  callbackFunction5 = childData => {
+    console.log(childData);
+    let array = [];
+    array.push(childData);
+    this.state.tags = array;
+    this.setState({ tags: array });
+  };
+
   render() {
     return (
       <Modal
@@ -44,6 +78,13 @@ class Filters extends React.Component {
         closeIcon
         size="tiny"
       >
+        <SpeechlyFilter2
+          parentCallback4={this.callbackFunction4}
+          parentCallback5={this.callbackFunction5}
+          parentCallback6={this.handleResetClick}
+          parentCallback7={this.handleApplyClick}
+          parentCallback8={this.props.toggleFilterModal}
+        />
         <Modal.Header>Filter transactions</Modal.Header>
         <Modal.Content>
           <Form>
@@ -81,6 +122,11 @@ class Filters extends React.Component {
           <Button content="Reset" onClick={this.handleResetClick} />
           <Button content="Apply" onClick={this.handleApplyClick} positive />
         </Modal.Actions>
+        <Modal.Content>
+          <PushToTalkButtonContainer>
+            <PushToTalkButton />
+          </PushToTalkButtonContainer>
+        </Modal.Content>
       </Modal>
     );
   }
