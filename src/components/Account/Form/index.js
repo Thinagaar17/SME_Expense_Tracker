@@ -73,11 +73,7 @@ class AccountForm extends React.Component {
   render() {
     return (
       <Form className="account-form" onSubmit={this.handleSubmit}>
-        <div elevation={3} style={{ textAlign: 'center', padding: '0 10%' }}>
-          Try saying: <br /> 
-          Set account 'name' with group 'type of group' for amount 'amount' <br />
-        </div>
-        {/* Initialize Speechly component with respectuve callback funtion */}
+      
         <Speechly
           parentCallback1={this.callbackFunction}
           parentCallback2={this.callbackFunction2}
