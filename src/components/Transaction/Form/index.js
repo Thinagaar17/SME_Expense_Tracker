@@ -31,7 +31,8 @@ class TransactionForm extends React.Component {
     date: '',
     acc: '',
     tag: '',
-    rec: '', // Resolved conflict by deleting notes 
+    rec: '', // Resolved conflict by deleting notes
+    notes: '',
     accounts: []
   };
 
@@ -150,13 +151,13 @@ class TransactionForm extends React.Component {
   };
 
   onSubmitFromSpeechly = event => {
-    console.log('transaction masuk');
     if (parseInt(this.props.form.amount) > 0) {
       this.props.saveTransaction(formToState(this.props.form));
       this.setState({ amount: 0 });
       this.props.form.amount = '0';
-      console.log('not edit');
     }
+    window.location.reload();
+    console.log("Refreshed")
   };
 
   onSubmitFromSpeechlyEditedForm = () => {
@@ -164,10 +165,6 @@ class TransactionForm extends React.Component {
       this.props.saveTransaction(formToState(this.props.form));
       this.props.form.amount = '0';
     }
-    console.log(typeof this.props.form.amount);
-    console.log('amount ' + this.props.form.amount);
-    console.log('amount ' + this.props.form.amount === 'String');
-    console.log('edit');
   };
 
   onChange = handler => (_, { value }) => handler(value);

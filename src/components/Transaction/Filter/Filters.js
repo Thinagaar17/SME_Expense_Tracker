@@ -57,7 +57,7 @@ class Filters extends React.Component {
       let accountId = newArray[0].id;
       let array = [];
       array.push(accountId.toString());
-      this.state.accounts = array;
+      // this.state.accounts = array;
       this.setState({ accounts: array });
     }
   };
@@ -66,7 +66,7 @@ class Filters extends React.Component {
     console.log(childData);
     let array = [];
     array.push(childData);
-    this.state.tags = array;
+    // this.state.tags = array;
     this.setState({ tags: array });
   };
 
