@@ -50,6 +50,13 @@ class ModalForm extends React.Component {
           icon="file text outline"
           content={this.props.isEdit ? 'Edit Account' : 'New Account'}
         />
+
+        <p style={{ marginTop: '0.2em' }}>To add or edit account: say [Set account 'any name' with group 'type of group' for amount 'any amount']</p>
+        <p style={{ marginTop: '0.2em' }}>To save account: say ['create']</p>
+        <p style={{ marginTop: '0.2em' }}>To delete account: say ['delete']</p>
+        <p style={{ marginTop: '0.2em' }}>To confirm delete: say ['proceed']</p>
+        <p style={{ marginTop: '0.2em' }}>To cancel delete: say ['cancel']</p>
+
         <Speechly
          parentCallback={this.callbackFunction}
          parentCallback3={this.callbackFunction3}
@@ -65,9 +72,11 @@ class ModalForm extends React.Component {
           )}
         </Modal.Content>
         <Modal.Actions>{this.renderModalActions()}</Modal.Actions>
-        <PushToTalkButtonContainer>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <PushToTalkButtonContainer>
             <PushToTalkButton />
-        </PushToTalkButtonContainer>
+          </PushToTalkButtonContainer>
+        </div>
       </Modal>
     );
   }
