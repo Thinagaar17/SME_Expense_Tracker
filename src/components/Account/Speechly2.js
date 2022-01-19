@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSpeechContext } from '@speechly/react-client';
 
 const Speechly = props => {

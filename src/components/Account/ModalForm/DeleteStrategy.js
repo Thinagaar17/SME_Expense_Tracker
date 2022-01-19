@@ -1,15 +1,8 @@
 import React from 'react';
-import { Button, Radio, Dropdown, Form, Progress } from 'semantic-ui-react';
+import { Button, Form, Progress } from 'semantic-ui-react';
 import {
   defaultDeleteStrategy,
-  getDeleteStartegyOptions,
-  DeleteStrategyT
 } from 'entities/Account';
-import {
-  PushToTalkButton,
-  PushToTalkButtonContainer
-} from '@speechly/react-ui';
-import Speechly from './Speechly';
 
 class DeleteStrategy extends React.Component {
   state = {
@@ -38,7 +31,6 @@ class DeleteStrategy extends React.Component {
     (this.props.accountOptions.length && this.props.accountOptions[0].key);
 
   render() {
-    const hasMultipleAccounts = this.props.accountOptions.length > 0;
     return (
       <React.Fragment>
         {/* <Speechly
