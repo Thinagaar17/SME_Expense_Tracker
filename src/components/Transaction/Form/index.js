@@ -51,14 +51,20 @@ class TransactionForm extends React.Component {
   };
 
   callbackFunction2 = childData => {
-    this.setState({ type: childData });
     console.log('type: ' + childData);
     if (childData === 'Income') {
       this.props.form.kind = Income;
+      this.setState({ type: Income });
     } else if (childData === 'Expense') {
       this.props.form.kind = Expense;
+      this.setState({ type: Expense });
     } else if (childData === 'Trasfer') {
-      this.props.form.kind = Transfer;
+      if (this.state.accounts.length > 1) {
+        this.props.form.kind = Transfer;
+        this.setState({ type: Transfer });
+      } else {
+        this.props.form.kind = this.state.type;
+      }
     } else {
       return null;
     }
@@ -157,7 +163,7 @@ class TransactionForm extends React.Component {
       this.props.form.amount = '0';
     }
     window.location.reload();
-    console.log("Refreshed")
+    console.log('Refreshed');
   };
 
   onSubmitFromSpeechlyEditedForm = () => {
