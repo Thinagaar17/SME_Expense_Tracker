@@ -35,13 +35,13 @@ export default [
     icon: 'line chart',
     component: Reports
   },
-  {
-    path: '/budget',
-    exact: false,
-    label: 'Budget',
-    icon: 'shopping basket',
-    component: WorkInProgress
-  },
+  // {
+  //   path: '/budget',
+  //   exact: false,
+  //   label: 'Budget',
+  //   icon: 'shopping basket',
+  //   component: WorkInProgress
+  // },
   {
     path: '/settings',
     exact: true,
