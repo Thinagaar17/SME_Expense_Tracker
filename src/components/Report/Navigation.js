@@ -44,6 +44,22 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className="container-header">
+
+        <div style={{ border: '1px solid blue', padding: '10px', marginBottom: '15px'}}>
+          <p style={{ marginTop: '0.4em', fontWeight: 'bold', textAlign: 'center', textDecoration: 'underline'}}>Voice Command Guideline</p>
+          <ul>
+            <li>To filter by report type, say: [Display report for 'report type' 'monthly/yearly']</li>
+            <p style={{fontStyle: 'italic' }}>Example: Display report for Expense and Income monthly</p>
+
+            <li>To filter by account, say: [Set account as 'account name']</li>
+            <p style={{fontStyle: 'italic' }}>Example: Set account as Adam</p>
+
+            <li>To filter by tag, say: [Set account as 'tag name']</li>
+            <p style={{fontStyle: 'italic' }}>Example: Set tag as salary</p>
+          </ul>
+          
+        </div>
+
         <Speechly
           parentCallback1={this.callbackFunction1}
           parentCallback2={this.callbackFunction2}
