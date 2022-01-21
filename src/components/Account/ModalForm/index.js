@@ -39,6 +39,7 @@ class ModalForm extends React.Component {
 
   render() {
     return (
+      <React.Fragment>
       <Modal
         closeIcon
         size="small"
@@ -65,10 +66,20 @@ class ModalForm extends React.Component {
           )}
         </Modal.Content>
         <Modal.Actions>{this.renderModalActions()}</Modal.Actions>
-        <PushToTalkButtonContainer>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop:140
+          }}
+        >
+          <PushToTalkButtonContainer>
             <PushToTalkButton />
-        </PushToTalkButtonContainer>
+          </PushToTalkButtonContainer>
+        </div>
       </Modal>
+      </React.Fragment>
     );
   }
 
