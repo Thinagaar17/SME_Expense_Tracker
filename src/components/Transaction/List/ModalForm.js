@@ -8,6 +8,10 @@ const ModalForm = props => {
     //  console.log('Delete transaction + modal form');
     props.removeTransaction(props.currentTransactionId);
     props.resetTransactionForm();
+    setTimeout(function() {
+      window.location.reload();
+    }, 1000);
+
     console.log('Delete transaction + modal form');
   };
   return (

@@ -62,12 +62,16 @@ class TransactionForm extends React.Component {
       if (this.state.accounts.length > 1) {
         this.props.form.kind = Transfer;
         this.setState({ type: Transfer });
-      } else {
-        this.props.form.kind = this.state.type;
+      }
+      console.log('Tab ' + this.props.form.kind);
+
+      if (this.props.form.amount > 0 && this.props.form.kind !==1) {
+        this.onSubmitFromSpeechly();
       }
     } else {
       return null;
     }
+     console.log('Tab ' + this.props.form.kind);
   };
 
   callbackFunction3 = childData => {
@@ -77,7 +81,8 @@ class TransactionForm extends React.Component {
 
   callbackFunction4 = childData => {
     let ACC = this.state.accounts;
-    const newArray = ACC.filter(element => element.name === childData);
+    const newArray = ACC.filter(element => element.name >= childData);
+    console.log({...newArray})
     if (newArray === []) {
       return null;
     } else {
@@ -124,7 +129,7 @@ class TransactionForm extends React.Component {
   callbackFunction6 = childData => {
     let ACC = this.state.accounts;
     const newArray = ACC.filter(element => element.name === childData);
-    if (newArray === []) {
+    if (newArray.length === 0) {
       return null;
     } else {
       let accountId = newArray[0].id;
@@ -163,7 +168,6 @@ class TransactionForm extends React.Component {
       this.props.form.amount = '0';
     }
     window.location.reload();
-    console.log('Refreshed');
   };
 
   onSubmitFromSpeechlyEditedForm = () => {
