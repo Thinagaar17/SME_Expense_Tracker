@@ -75,62 +75,71 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <Modal
-        open={this.props.isFilterModalOpen}
-        onClose={this.props.toggleFilterModal}
-        closeIcon
-        size="tiny"
-      >
-        <SpeechlyFilter2
-          parentCallback4={this.callbackFunction4}
-          parentCallback5={this.callbackFunction5}
-          parentCallback6={this.handleResetClick}
-          parentCallback7={this.handleApplyClick}
-          parentCallback8={this.props.toggleFilterModal}
-        />
-        <Modal.Header>Filter transactions</Modal.Header>
-        <Modal.Content>
-          <Form>
-            <Form.Group widths="equal">
-              <Form.Field>
-                <label>Account</label>
-                <Dropdown
-                  multiple
-                  selection
-                  search
-                  closeOnChange
-                  onChange={this.handleAccountChange}
-                  options={this.props.accountOptions}
-                  value={this.state.accounts}
-                />
-              </Form.Field>
-            </Form.Group>
-            <Form.Group widths="equal">
-              <Form.Field>
-                <label>Tags</label>
-                <Dropdown
-                  multiple
-                  selection
-                  search
-                  closeOnChange
-                  onChange={this.handleTagsChange}
-                  options={this.props.tagsOptions}
-                  value={this.state.tags}
-                />
-              </Form.Field>
-            </Form.Group>
-          </Form>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button content="Reset" onClick={this.handleResetClick} />
-          <Button content="Apply" onClick={this.handleApplyClick} positive />
-        </Modal.Actions>
-        <Modal.Content>
+      <React.Fragment>
+        <Modal
+          open={this.props.isFilterModalOpen}
+          onClose={this.props.toggleFilterModal}
+          closeIcon
+          size="tiny"
+        >
+          <SpeechlyFilter2
+            parentCallback4={this.callbackFunction4}
+            parentCallback5={this.callbackFunction5}
+            parentCallback6={this.handleResetClick}
+            parentCallback7={this.handleApplyClick}
+            parentCallback8={this.props.toggleFilterModal}
+          />
+          <Modal.Header>Filter transactions</Modal.Header>
+          <Modal.Content>
+            <Form>
+              <Form.Group widths="equal">
+                <Form.Field>
+                  <label>Account</label>
+                  <Dropdown
+                    multiple
+                    selection
+                    search
+                    closeOnChange
+                    onChange={this.handleAccountChange}
+                    options={this.props.accountOptions}
+                    value={this.state.accounts}
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group widths="equal">
+                <Form.Field>
+                  <label>Tags</label>
+                  <Dropdown
+                    multiple
+                    selection
+                    search
+                    closeOnChange
+                    onChange={this.handleTagsChange}
+                    options={this.props.tagsOptions}
+                    value={this.state.tags}
+                  />
+                </Form.Field>
+              </Form.Group>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button content="Reset" onClick={this.handleResetClick} />
+            <Button content="Apply" onClick={this.handleApplyClick} positive />
+          </Modal.Actions>
+          <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop:140
+          }}
+        >
           <PushToTalkButtonContainer>
             <PushToTalkButton />
           </PushToTalkButtonContainer>
-        </Modal.Content>
-      </Modal>
+        </div>
+        </Modal>
+      </React.Fragment>
     );
   }
 }
