@@ -41,12 +41,13 @@ class BalanceTable extends React.Component {
         style={{ marginBottom: '1em', marginTop: '1em' }}
       >
         <Form.Field className="checkbox" width={9}>
-          <Checkbox
+          
+          {/* <Checkbox
             value={code}
-            label={Currency.name(code)}
+            label={Currency.name('MYR')}
             checked={this.props.form.currencies.includes(code)}
             onChange={this.handleCurrencyChange}
-          />
+          /> */}
         </Form.Field>
         <Form.Field className="input-right" width={7}>
           {this.props.form.id ? (
@@ -63,10 +64,11 @@ class BalanceTable extends React.Component {
               type="number"
               placeholder="Balance"
               labelPosition="right"
-              label={code}
+              label={'MYR'}
               step={Currency.minAmount(code)}
               value={this.props.form.balance[code] || ''}
               onChange={this.handleBalanceChange(code)}
+              checked={true}
             />
           )}
         </Form.Field>

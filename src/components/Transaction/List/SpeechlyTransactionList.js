@@ -7,7 +7,7 @@ const SpeechlyTransactionList = props => {
   useEffect(
     () => {
       if (segment) {
-        if (segment.intent.intent === 'cancel_transaction') {
+        if (segment.intent.intent === 'cancel_transaction' || segment.intent.intent === 'delete_account'  ) {
           props.parentCallback();
         }
       }

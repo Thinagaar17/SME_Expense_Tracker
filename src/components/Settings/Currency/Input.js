@@ -21,6 +21,7 @@ class Input extends React.Component {
   }
 
   handleBaseChange = (event, { value }) => {
+  //  console.log(typeof value)
     this.props.changeSettingsCurrency({
       base: 'MYR',
       secondary: this.props.secondary
@@ -45,7 +46,7 @@ class Input extends React.Component {
               selection
               onChange={this.handleBaseChange}
               options={this.options}
-              value={'MYR'}
+              value={this.props.base}
             />
           </Form.Field>
           {/* <Form.Field>
