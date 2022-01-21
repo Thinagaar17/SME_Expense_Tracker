@@ -22,9 +22,18 @@ class Reports extends React.Component {
         <Report {...this.props} />
         <Filter />
 
-        <PushToTalkButtonContainer>
-          <PushToTalkButton />
-        </PushToTalkButtonContainer>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop:60
+          }}
+        >
+          <PushToTalkButtonContainer>
+            <PushToTalkButton />
+          </PushToTalkButtonContainer>
+        </div>
       </div>
     );
   }

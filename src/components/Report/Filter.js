@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 import { DropdownOption } from '../types';
 import Speechly2 from './Speechly2';
+import Accounts from '../../../src/util/storage/accounts';
 
 class Filter extends React.Component {
   handleAccountsChange = (_, { value }) => {
@@ -18,14 +19,20 @@ class Filter extends React.Component {
     this.props.changeReportExcludedTags([childData]);
   };
 
+  //fetch all accounts from the db
+  async componentDidMount() {
+    const account = await Accounts.loadAll();
+    this.setState({ accounts: account });
+  }
+
   callbackFunction4 = childData => {
-    console.log('sana ' + childData);
-    if (childData === 'Adam') {
-      this.props.changeReportAccounts(['A1641729573400']);
-    } else if (childData === 'Alex') {
-      this.props.changeReportAccounts(['A1641729521974']);
-    } else if (childData === 'John') {
-      this.props.changeReportAccounts(['A1641729583593']);
+    let ACC = this.state.accounts;
+    const newArray = ACC.filter(element => element.name === childData);
+    if (newArray === []) {
+      return null;
+    } else {
+      let accountId = newArray[0].id;
+      this.props.changeReportAccounts([accountId]);
     }
   };
 

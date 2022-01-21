@@ -327,7 +327,8 @@ class TransactionForm extends React.Component {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingTop:60
           }}
         >
           <PushToTalkButtonContainer>
