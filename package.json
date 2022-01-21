@@ -52,6 +52,7 @@
     "node": ">=8.12",
     "npm": ">=6"
   },
+
   "scripts": {
     "pretty": "prettier --write 'src/**/*.js'",
     "start": "react-scripts start",
@@ -67,3 +68,4 @@
     "not op_mini all"
   ]
 }
+

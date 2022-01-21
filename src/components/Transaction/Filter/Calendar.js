@@ -17,7 +17,7 @@ function YearMonthForm({ date, localeUtils, onChange }) {
 
   const handleChange = function handleChange(e) {
     const { year, month } = e.target.form;
-    console.log(year.value, month.value )
+    console.log(year.value, month.value);
     onChange(new Date(year.value, month.value));
   };
 
@@ -50,8 +50,8 @@ class Calendar extends React.Component {
 
   handleDayClick = day => {
     const range = DateUtils.addDayToRange(day, this.state);
-    console.log(day)
-    console.log(range)
+    console.log(day);
+    console.log(range);
     this.setState(range);
   };
 
@@ -118,3 +118,5 @@ class Calendar extends React.Component {
 }
 
 export default Calendar;
+
+// Testing CI/CD
