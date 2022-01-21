@@ -7,7 +7,7 @@ const Speechly = props => {
   useEffect(
     () => {
       if (segment) {
-        if (segment.intent.intent === 'create_transaction') {
+        if (segment.intent.intent === 'create_transaction' || segment.intent.intent === 'proceed') {
           props.parentCallback6();
         } else if (segment.intent.intent === 'add_income') {
           props.parentCallback2('Income');
@@ -65,6 +65,12 @@ const Speechly = props => {
                 .slice(1)
                 .toLowerCase()}`;
               props.parentCallback2(trans);
+              break;
+            case 'tagarray':
+              const tagarray = `${e.value.charAt(0)}${e.value
+                .slice(1)
+                .toLowerCase()}`;
+              props.parentCallback5(tagarray);
               break;
             default:
               break;

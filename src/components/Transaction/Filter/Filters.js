@@ -51,7 +51,9 @@ class Filters extends React.Component {
   callbackFunction4 = childData => {
     let ACC = this.state.newAcc;
     const newArray = ACC.filter(element => element.name === childData);
-    if (newArray === []) {
+    console.log('newArray' + newArray);
+    if (newArray.length === 0) {
+      console.log('No acc');
       return null;
     } else {
       let accountId = newArray[0].id;
@@ -59,6 +61,7 @@ class Filters extends React.Component {
       array.push(accountId.toString());
       // this.state.accounts = array;
       this.setState({ accounts: array });
+      array = [];
     }
   };
 
