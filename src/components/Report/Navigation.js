@@ -54,8 +54,8 @@ class Navigation extends React.Component {
             <li>To filter by account, say: [Set account as 'account name']</li>
             <p style={{fontStyle: 'italic' }}>Example: Set account as Adam</p>
 
-            <li>To filter by tag, say: [Set account as 'tag name']</li>
-            <p style={{fontStyle: 'italic' }}>Example: Set tag as salary</p>
+            <li>To filter by excluding tag, say: [Exclude 'tag name' tag]</li>
+            <p style={{fontStyle: 'italic' }}>Example: Exclude salary tag</p>
           </ul>
           
         </div>
