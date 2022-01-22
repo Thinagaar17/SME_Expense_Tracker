@@ -15,8 +15,11 @@ const Speechly = props => {
                 .toLowerCase()}`;
               props.parentCallback1(reportType);
               break;
-            case 'date':
-              props.parentCallback2(e.value);
+            case 'reporttime':
+              const reportTime = `${e.value.charAt(0)}${e.value
+                .slice(1)
+                .toLowerCase()}`;
+              props.parentCallback2(reportTime);
               break;
 
             default:
