@@ -18,7 +18,7 @@ class Navigation extends React.Component {
   callbackFunction1 = childData => {    
     if (childData === 'Expense and income') {
       this.props.changeReportKind('expense_income');
-    } else if (childData === 'Expense by Tag') {
+    } else if (childData === 'Expense by tag') {
       this.props.changeReportKind('expense_tags');
     } else if (childData === 'Net income') {
       this.props.changeReportKind('net_income');
@@ -32,9 +32,9 @@ class Navigation extends React.Component {
   callbackFunction2 = childData => {    
     console.log('sini: ' + childData);
     this.props.changeReportTimespan(childData);
-    if (childData === 'YEARLY') {
+    if (childData === 'Yearly') {
       this.props.changeReportTimespan('yearly');
-    } else if (childData === 'MONTHLY') {
+    } else if (childData === 'Monthly') {
       this.props.changeReportTimespan('monthly')
     } else {
       return null;
