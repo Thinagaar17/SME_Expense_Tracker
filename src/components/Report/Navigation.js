@@ -18,7 +18,7 @@ class Navigation extends React.Component {
   callbackFunction1 = childData => {    
     if (childData === 'Expense and income') {
       this.props.changeReportKind('expense_income');
-    } else if (childData === 'Expense by Tag') {
+    } else if (childData === 'Expense by tag') {
       this.props.changeReportKind('expense_tags');
     } else if (childData === 'Net income') {
       this.props.changeReportKind('net_income');
@@ -32,9 +32,9 @@ class Navigation extends React.Component {
   callbackFunction2 = childData => {    
     console.log('sini: ' + childData);
     this.props.changeReportTimespan(childData);
-    if (childData === 'YEARLY') {
+    if (childData === 'Yearly') {
       this.props.changeReportTimespan('yearly');
-    } else if (childData === 'MONTHLY') {
+    } else if (childData === 'Monthly') {
       this.props.changeReportTimespan('monthly')
     } else {
       return null;
@@ -44,6 +44,22 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className="container-header">
+
+        <div style={{ border: '1px solid blue', padding: '10px', marginBottom: '15px'}}>
+          <p style={{ marginTop: '0.4em', fontWeight: 'bold', textAlign: 'center', textDecoration: 'underline'}}>Voice Command Guideline</p>
+          <ul>
+            <li>To filter by report type, say: [Display report for 'report type' 'monthly/yearly']</li>
+            <p style={{fontStyle: 'italic' }}>Example: Display report for Expense and Income monthly</p>
+
+            <li>To filter by account, say: [Set account as 'account name']</li>
+            <p style={{fontStyle: 'italic' }}>Example: Set account as Adam</p>
+
+            <li>To filter by excluding tag, say: [Exclude 'tag name' tag]</li>
+            <p style={{fontStyle: 'italic' }}>Example: Exclude salary tag</p>
+          </ul>
+          
+        </div>
+
         <Speechly
           parentCallback1={this.callbackFunction1}
           parentCallback2={this.callbackFunction2}
