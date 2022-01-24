@@ -16,7 +16,6 @@ Sentry.init({
 const store = configureStore();
 const history = createBrowserHistory();
 ReactDOM.render(
-  // 7e075e00-0408-4ed0-b3ed-9e634f85721b -- 2c7b9fce-c5fa-4a0a-a9dd-2146ad21b415
   <SpeechProvider appId="7e075e00-0408-4ed0-b3ed-9e634f85721b" language="en-US">
     <Root store={store} history={history} />
   </SpeechProvider>,
@@ -31,5 +30,3 @@ if (module.hot) {
 
 //wrap root with speechprovider
 //refer to youtube 1.54.30
-
-// Testing purposes

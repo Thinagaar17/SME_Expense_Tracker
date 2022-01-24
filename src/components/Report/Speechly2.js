@@ -9,9 +9,12 @@ const Speechly = props => {
       if (segment) {
         segment.entities.forEach(e => {
           switch (e.type) {
-            case 'reporttag':
-              const tag = `${e.value.slice(0).toLowerCase()}`;
+            case 'tagarray':
+              const tag = `${e.value.charAt(0)}${e.value
+                .slice(1)
+                .toLowerCase()}`;
               props.parentCallback3(tag);
+              console.log(tag);
               break;
             case 'account_name':
               const acc = `${e.value.charAt(0)}${e.value
@@ -19,6 +22,19 @@ const Speechly = props => {
                 .toLowerCase()}`;
               props.parentCallback4(acc);
               break;
+              case 'reporttag':
+                const tag2 = `${e.value.charAt(0)}${e.value
+                  .slice(1)
+                  .toLowerCase()}`;
+                props.parentCallback3(tag);
+                console.log(tag2);
+                break;
+                case 'account':
+                  const acc2 = `${e.value.charAt(0)}${e.value
+                    .slice(1)
+                    .toLowerCase()}`;
+                  props.parentCallback4(acc2);
+                  break;
             default:
               break;
           }
