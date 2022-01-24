@@ -16,6 +16,7 @@ class Filter extends React.Component {
   };
 
   callbackFunction3 = childData => {
+    console.log("child data"+childData)
     this.props.changeReportExcludedTags([childData]);
   };
 
