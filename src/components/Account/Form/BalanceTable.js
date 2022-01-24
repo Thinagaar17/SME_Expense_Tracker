@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, Input, Form } from 'semantic-ui-react';
+import { Input, Form } from 'semantic-ui-react';
 import Amount from '../../../components/Amount';
 import Currency from '../../../entities/Currency';
 

@@ -106,7 +106,7 @@ class Filters extends React.Component {
                   />
                 </Form.Field>
               </Form.Group>
-              <Form.Group widths="equal">
+              {/* <Form.Group widths="equal">
                 <Form.Field>
                   <label>Tags</label>
                   <Dropdown
@@ -119,7 +119,7 @@ class Filters extends React.Component {
                     value={this.state.tags}
                   />
                 </Form.Field>
-              </Form.Group>
+              </Form.Group> */}
             </Form>
           </Modal.Content>
           <Modal.Actions>
