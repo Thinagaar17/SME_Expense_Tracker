@@ -19,6 +19,7 @@ const Speechly = props => {
               const reportTime = `${e.value.charAt(0)}${e.value
                 .slice(1)
                 .toLowerCase()}`;
+                console.log("reportTime"+reportTime)
               props.parentCallback2(reportTime);
               break;
 
