@@ -25,6 +25,14 @@ class Accounts extends React.Component {
     return (
       <div className="container-full-page flat">
         <div className="container-header">
+          <div style={{ border: '1px solid blue', padding: '10px', marginBottom: '15px'}}>
+            <p style={{ marginTop: '0.4em', fontWeight: 'bold', textAlign: 'center', textDecoration: 'underline'}}>Voice Command Guideline</p>
+            <p>To save account, confirm delete or cancel delete:</p>
+            <ul>
+              <li>Stop pressing the microphone button after add account details or after delete account</li>
+              <li>Press the button again and say respective command</li>
+            </ul>
+          </div>
           <Button.Group basic>
             <Button
               icon="plus"
