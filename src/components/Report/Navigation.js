@@ -30,7 +30,7 @@ class Navigation extends React.Component {
   };
 
   callbackFunction2 = childData => {    
-    console.log('sini: ' + childData);
+    console.log('Navigation: ' + childData);
     this.props.changeReportTimespan(childData);
     if (childData === 'Yearly') {
       this.props.changeReportTimespan('yearly');
