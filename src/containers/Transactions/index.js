@@ -32,6 +32,46 @@ class Transactions extends React.Component {
   render() {
     return (
       <div className="container-full-page flat search-page">
+        <div
+          style={{
+            border: '1px solid blue',
+            padding: '10px',
+            marginBottom: '15px'
+          }}
+        >
+          <p
+            style={{
+              marginTop: '0.4em',
+              fontWeight: 'bold',
+              textAlign: 'center',
+              textDecoration: 'underline'
+            }}
+          >
+            Voice Command Guideline
+          </p>
+          <ul>
+            <li>To open new transaction model, say:</li>
+            <p style={{ fontStyle: 'italic' }}>Example: New transaction</p>
+            <li>To filter date, say: [Change date to 'date']</li>
+            <p style={{ fontStyle: 'italic' }}>
+              Example: Change date to yesterday
+            </p>
+            <li>To open filter transaction model, say:</li>
+            <p style={{ fontStyle: 'italic' }}>Example: Filter transaction</p>
+            <li>To add account, say: [Add account 'account name'] </li>
+            <p style={{ fontStyle: 'italic' }}>Example: Add account Adam</p>
+            <li>To apply changes, say: </li>
+            <p style={{ fontStyle: 'italic' }}>
+              Example: Apply
+            </p>
+            <li>To reset modal, say: </li>
+            <p style={{ fontStyle: 'italic' }}>
+              Example: Reset
+            </p>
+            <li>To close modal, say: </li>
+            <p style={{ fontStyle: 'italic' }}>Example: Close modal </p>
+          </ul>
+        </div>
         <Filter selectedAccount={this.props.match.params.accountId} />
         <List />
         <Pager />
