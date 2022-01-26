@@ -7,8 +7,13 @@ const SpeechlyTransactionList = props => {
   useEffect(
     () => {
       if (segment) {
-        if (segment.intent.intent === 'cancel_transaction' || segment.intent.intent === 'delete_account'  ) {
+        if (
+          segment.intent.intent === 'cancel_transaction' ||
+          segment.intent.intent === 'delete_account'
+        ) {
           props.parentCallback();
+        } else if (segment.intent.intent === 'close_model') {
+          props.parentCallback2();
         }
       }
     },
