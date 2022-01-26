@@ -40,7 +40,7 @@ const ModalForm = props => {
           />
         </Modal.Actions>
       )}
-      <SpeechlyTransactionList parentCallback={callbackFunction} />
+      <SpeechlyTransactionList parentCallback={callbackFunction} parentCallback2={props.resetTransactionForm} />
     </Modal>
   );
 };
