@@ -1,6 +1,0 @@
-WILL BE USING 01_DEVELOP as mergin point
-
-Testing the new repo
-All look fine for now
-
-~ Thank you
